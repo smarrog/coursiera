@@ -109,6 +109,7 @@ namespace Svg {
         Text& SetOffset(Point point);
         Text& SetFontSize(uint32_t value);
         Text& SetFontFamily(const std::string& value);
+        Text& SetFontWeight(const std::string& value);
         Text& SetData(const std::string& value);
 
         void Render(std::ostream& os) const override;
@@ -119,6 +120,7 @@ namespace Svg {
         uint32_t _size = 1;
         std::string _family;
         std::string _data;
+        std::string _weight;
     };
 
     // DOCUMENT
