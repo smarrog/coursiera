@@ -1,0 +1,21 @@
+package nicestring
+
+fun String.isNiceCondition1(): Boolean {
+    return !contains("bu") && !contains("ba") && !contains("be")
+}
+
+fun String.isNiceCondition2(): Boolean {
+    return count{listOf('a', 'e', 'i', 'o', 'u').indexOf(it) != -1} >= 3
+}
+
+fun String.isNiceCondition3(): Boolean {
+    return zipWithNext().any{(first, second) -> first == second}
+}
+
+fun String.isNice(): Boolean {
+    var metConditions = 0
+    if (this.isNiceCondition1()) metConditions++
+    if (this.isNiceCondition2()) metConditions++
+    if (this.isNiceCondition3()) metConditions++
+    return metConditions >= 2
+}

@@ -1,0 +1,30 @@
+package mastermind
+
+import java.lang.Integer.min
+
+data class Evaluation(val rightPosition: Int, val wrongPosition: Int)
+
+fun evaluateGuess(secret: String, guess: String): Evaluation {
+    var rightPosition = 0
+
+    val mSecret = mutableMapOf<Char, Int>()
+    val mGuess = mutableMapOf<Char, Int>()
+
+    for (i in 0 until secret.length) {
+        if (secret[i] == guess[i]) {
+            rightPosition++
+            continue
+        }
+        mSecret.merge(secret[i], 1, Int::plus)
+        mGuess.merge(guess[i], 1, Int::plus)
+    }
+
+    var wrongPosition = 0
+    for ((key, value) in mGuess) {
+        if (mSecret.containsKey(key)) {
+            wrongPosition += min(value, mSecret[key]!!)
+        }
+    }
+
+    return Evaluation(rightPosition, wrongPosition)
+}
